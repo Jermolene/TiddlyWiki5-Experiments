@@ -1,0 +1,125 @@
+title: $:/themes/tiddlywiki/vivid/animations
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Vivid theme — animations pass.
+** Kept in its own stylesheet so the theme degrades gracefully if removed.
+** Everything here is disabled under prefers-reduced-motion (see end).
+*/
+
+@keyframes vivid-card-in {
+	from { opacity: 0; transform: translateY(14px) scale(0.985); }
+	to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes vivid-pop-in {
+	from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+	to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes vivid-underline-in {
+	from { transform: scaleX(0); }
+	to   { transform: scaleX(1); }
+}
+
+@keyframes vivid-modal-in {
+	from { opacity: 0; transform: translateY(18px) scale(0.97); }
+	to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes vivid-fade-in {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+@keyframes vivid-glow-pulse {
+	0%, 100% { box-shadow: 0 6px 16px rgba(139,92,255,0.40); }
+	50%      { box-shadow: 0 8px 24px rgba(255,73,219,0.55); }
+}
+
+@keyframes vivid-drift {
+	from { transform: translate3d(-1.5%, -1%, 0) scale(1.05); }
+	to   { transform: translate3d(1.5%, 1%, 0) scale(1.12); }
+}
+
+/* --- Ambient background: animate a transform layer (GPU-friendly) --- */
+html {
+	background-image: none;
+}
+
+html::before {
+	content: "";
+	position: fixed;
+	inset: -15%;
+	z-index: -1;
+	pointer-events: none;
+	background-image:
+		radial-gradient(900px 600px at 100% 0%, rgba(139,92,255,0.22), transparent 60%),
+		radial-gradient(820px 600px at 0% 100%, rgba(34,211,238,0.16), transparent 55%),
+		radial-gradient(700px 520px at 50% 45%, rgba(255,73,219,0.07), transparent 60%);
+	will-change: transform;
+	animation: vivid-drift 38s ease-in-out infinite alternate;
+}
+
+/* --- Story river: cards rise in when opened (and stagger on first paint) --- */
+.tc-story-river .tc-tiddler-frame {
+	animation: vivid-card-in 380ms var(--vivid-ease) both;
+}
+
+.tc-story-river .tc-tiddler-frame:nth-child(2) { animation-delay: 60ms; }
+.tc-story-river .tc-tiddler-frame:nth-child(3) { animation-delay: 120ms; }
+.tc-story-river .tc-tiddler-frame:nth-child(4) { animation-delay: 180ms; }
+
+/* --- Tab underline grows in when a tab becomes selected --- */
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected::after {
+	transform-origin: center;
+	animation: vivid-underline-in 260ms var(--vivid-ease) both;
+}
+
+/* --- Dropdowns and popups pop in --- */
+.tc-drop-down,
+.tc-block-dropdown {
+	transform-origin: top center;
+	animation: vivid-pop-in 180ms var(--vivid-ease) both;
+}
+
+/* --- Modals scale in over a fading backdrop --- */
+.tc-modal {
+	animation: vivid-modal-in 300ms var(--vivid-ease) both;
+}
+
+.tc-modal-backdrop {
+	animation: vivid-fade-in 300ms ease both;
+}
+
+/* --- Tag pills: micro-lift and brighten on hover --- */
+.tc-tag-label {
+	transition: transform 140ms var(--vivid-ease), box-shadow 140ms var(--vivid-ease), filter 140ms var(--vivid-ease);
+}
+
+.tc-tag-label:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.12);
+	box-shadow: 0 4px 14px rgba(139,92,255,0.35);
+}
+
+/* --- New-tiddler button: gentle glow pulse while hovered --- */
+.tc-page-controls button[class*="new-tiddler"]:hover {
+	animation: vivid-glow-pulse 1.6s ease-in-out infinite;
+}
+
+/* --- Respect users who prefer reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+	html::before { animation: none; }
+	.tc-story-river .tc-tiddler-frame,
+	.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected::after,
+	.tc-drop-down,
+	.tc-block-dropdown,
+	.tc-modal,
+	.tc-modal-backdrop,
+	.tc-page-controls button[class*="new-tiddler"]:hover {
+		animation: none;
+	}
+}
