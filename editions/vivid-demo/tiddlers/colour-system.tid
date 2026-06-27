@@ -1,0 +1,13 @@
+title: Colour system
+tags: Design Components
+
+The palette is defined in [[$:/palettes/Vivid]] and drives every surface through the `<<colour>>` macro.
+
+Primary accents:
+
+* Violet `#8b5cff` — links and primary actions
+* Cyan `#22d3ee` — sidebar links and info
+* Magenta `#ff49db` — hover and emphasis
+* Lime `#b4f461` — success and stability
+
+Backgrounds step from a near-black page field up through glassy translucent panels.

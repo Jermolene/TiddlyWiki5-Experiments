@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/vivid",
+	"name": "Vivid",
+	"author": "TiddlyWiki5 Experiments",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Dark, glassy theme with fat saturated colours",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"],
+	"plugin-priority": "0"
+}

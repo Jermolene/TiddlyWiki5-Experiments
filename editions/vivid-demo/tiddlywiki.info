@@ -1,0 +1,14 @@
+{
+	"description": "Vivid theme demo",
+	"plugins": [
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/vivid"
+	],
+	"build": {
+		"index": [
+			"--render","$:/core/save/all","index.html","text/plain"]
+	}
+}

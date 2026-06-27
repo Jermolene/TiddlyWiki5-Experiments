@@ -1,0 +1,161 @@
+title: $:/themes/tiddlywiki/vivid/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Vivid theme — base stylesheet
+** Accent tokens live here so later animation work can reference them in one place.
+*/
+:root {
+	--vivid-violet: #8b5cff;
+	--vivid-cyan: #22d3ee;
+	--vivid-magenta: #ff49db;
+	--vivid-lime: #b4f461;
+	--vivid-glass: rgba(255,255,255,0.045);
+	--vivid-glass-strong: rgba(255,255,255,0.075);
+	--vivid-glass-border: rgba(255,255,255,0.09);
+	--vivid-radius: 16px;
+	--vivid-radius-lg: 22px;
+	--vivid-shadow: 0 10px 34px rgba(0,0,0,0.5);
+	--vivid-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Ambient gradient field behind everything — gives the glass something to refract */
+html {
+	background-color: <<colour page-background>>;
+	background-image:
+		radial-gradient(900px 600px at 100% -5%, rgba(139,92,255,0.22), transparent 60%),
+		radial-gradient(820px 600px at -5% 110%, rgba(34,211,238,0.16), transparent 55%),
+		radial-gradient(700px 520px at 50% 45%, rgba(255,73,219,0.07), transparent 60%);
+	background-attachment: fixed;
+}
+
+/* ====================== SIDEBAR ====================== */
+
+.tc-sidebar-header {
+	padding-top: 1.2em;
+}
+
+/* Site title: bold gradient wordmark */
+.tc-site-title {
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	font-size: 2.2em;
+	line-height: 1.1;
+	background: linear-gradient(135deg, var(--vivid-violet) 0%, var(--vivid-cyan) 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+.tc-site-subtitle {
+	color: <<colour sidebar-muted-foreground>>;
+	font-size: 0.95em;
+	margin-top: 0.25em;
+	letter-spacing: 0.01em;
+}
+
+/* Search box: glassy pill with focus glow */
+.tc-sidebar-header .tc-search input,
+.tc-sidebar-header input.tc-edit-texteditor {
+	background: var(--vivid-glass);
+	border: 1px solid var(--vivid-glass-border);
+	border-radius: 999px;
+	padding: 0.55em 0.95em;
+	color: <<colour sidebar-foreground>>;
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	transition: box-shadow 200ms var(--vivid-ease), border-color 200ms var(--vivid-ease), background 200ms var(--vivid-ease);
+}
+
+.tc-sidebar-header .tc-search input:focus,
+.tc-sidebar-header input.tc-edit-texteditor:focus {
+	outline: none;
+	border-color: var(--vivid-violet);
+	box-shadow: 0 0 0 3px rgba(139,92,255,0.25), 0 0 22px rgba(139,92,255,0.28);
+	background: var(--vivid-glass-strong);
+}
+
+/* Page-control icon buttons: round glass chips that lift and glow on hover */
+.tc-page-controls button {
+	border-radius: 12px;
+	padding: 6px;
+	margin: 3px;
+	transition: transform 180ms var(--vivid-ease), background 180ms var(--vivid-ease), box-shadow 180ms var(--vivid-ease);
+}
+
+.tc-page-controls button:hover {
+	background: var(--vivid-glass-strong);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(139,92,255,0.30);
+}
+
+.tc-page-controls button svg {
+	fill: <<colour sidebar-controls-foreground>>;
+	transition: fill 180ms var(--vivid-ease);
+}
+
+.tc-page-controls button:hover svg {
+	fill: var(--vivid-magenta);
+}
+
+/* Sidebar tabs: pill row */
+.tc-sidebar-lists .tc-tab-buttons button {
+	border: 1px solid transparent;
+	border-radius: 999px;
+	padding: 0.35em 0.9em;
+	margin: 0 0.4em 0.4em 0;
+	background: transparent;
+	color: <<colour sidebar-tab-foreground>>;
+	font-weight: 600;
+	transition: all 180ms var(--vivid-ease);
+}
+
+.tc-sidebar-lists .tc-tab-buttons button:hover {
+	background: var(--vivid-glass);
+	border-color: var(--vivid-glass-border);
+	color: <<colour sidebar-muted-foreground-hover>>;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected,
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected:hover {
+	background: linear-gradient(135deg, rgba(139,92,255,0.95), rgba(34,211,238,0.9));
+	color: #0b0c14;
+	border-color: transparent;
+	box-shadow: 0 6px 16px rgba(139,92,255,0.38);
+}
+
+/* Tab content area: floating glass card */
+.tc-sidebar-lists .tc-tab-content {
+	background: var(--vivid-glass);
+	border: 1px solid var(--vivid-glass-border);
+	border-radius: var(--vivid-radius);
+	padding: 0.85em 1.05em;
+	margin-top: 0.7em;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	box-shadow: var(--vivid-shadow);
+}
+
+/* Sidebar tiddler links */
+.tc-sidebar-lists a.tc-tiddlylink {
+	color: <<colour sidebar-tiddler-link-foreground>>;
+	border-radius: 6px;
+	padding: 1px 4px;
+	transition: color 160ms var(--vivid-ease), background 160ms var(--vivid-ease);
+}
+
+.tc-sidebar-lists a.tc-tiddlylink:hover {
+	color: <<colour sidebar-tiddler-link-foreground-hover>>;
+	background: rgba(34,211,238,0.12);
+	text-decoration: none;
+}
+
+/* Tag pills (used throughout, prominent in the sidebar Tags tab) */
+.tc-tag-label {
+	border-radius: 999px;
+	padding: 0.18em 0.75em;
+	font-weight: 600;
+}

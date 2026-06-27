@@ -1,0 +1,10 @@
+title: Sidebar
+tags: Components Design
+
+The sidebar is the first surface styled in Vivid:
+
+* Gradient wordmark for the site title
+* Glassy pill search with a violet focus glow
+* Round page-control chips that lift on hover
+* Pill tab buttons with a gradient selected state
+* A floating glass card behind the tab content
