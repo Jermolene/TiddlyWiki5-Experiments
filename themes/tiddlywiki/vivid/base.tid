@@ -101,42 +101,128 @@ html {
 	fill: var(--vivid-magenta);
 }
 
-/* Sidebar tabs: pill row */
+/*
+** Sidebar tabs — each tab-set is ONE cohesive glass card: the button strip
+** and the content share the same panel, so the tabs read as part of the
+** content rather than a detached row of buttons. overflow:hidden clips the
+** rounded corners so nothing (especially vertical tabs) overhangs.
+*/
+.tc-sidebar-lists .tc-tab-set {
+	background: var(--vivid-glass);
+	border: 1px solid var(--vivid-glass-border);
+	border-radius: var(--vivid-radius);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	box-shadow: var(--vivid-shadow);
+	margin-top: 0.7em;
+	overflow: hidden;
+}
+
+/* Horizontal button strip: a header divided from the content below */
+.tc-sidebar-lists .tc-tab-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.1em;
+	padding: 0.35em 0.5em 0;
+	margin: 0;
+	border-bottom: 1px solid var(--vivid-glass-border);
+}
+
 .tc-sidebar-lists .tc-tab-buttons button {
-	border: 1px solid transparent;
-	border-radius: 999px;
-	padding: 0.35em 0.9em;
-	margin: 0 0.4em 0.4em 0;
+	position: relative;
 	background: transparent;
+	border: none;
+	border-radius: 8px 8px 0 0;
+	padding: 0.5em 0.85em;
+	margin: 0;
 	color: <<colour sidebar-tab-foreground>>;
 	font-weight: 600;
-	transition: all 180ms var(--vivid-ease);
+	transition: color 160ms var(--vivid-ease), background 160ms var(--vivid-ease);
 }
 
 .tc-sidebar-lists .tc-tab-buttons button:hover {
 	background: var(--vivid-glass);
-	border-color: var(--vivid-glass-border);
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
+/* Selected horizontal tab: bright text + gradient underline sitting on the divider */
 .tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected,
 .tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected:hover {
-	background: linear-gradient(135deg, rgba(139,92,255,0.95), rgba(34,211,238,0.9));
-	color: #0b0c14;
-	border-color: transparent;
-	box-shadow: 0 6px 16px rgba(139,92,255,0.38);
+	color: #ffffff;
+	background: transparent;
+	border: none;
+	outline: none;
 }
 
-/* Tab content area: floating glass card */
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected::after {
+	content: "";
+	position: absolute;
+	left: 0.5em;
+	right: 0.5em;
+	bottom: -1px;
+	height: 3px;
+	border-radius: 3px 3px 0 0;
+	background: linear-gradient(90deg, var(--vivid-violet), var(--vivid-cyan));
+}
+
+/* Content shares the card — no separate floating box */
 .tc-sidebar-lists .tc-tab-content {
+	margin-top: 0;
+	padding: 0.9em 1.05em;
+}
+
+/*
+** Nested vertical tabs (e.g. the "More" tab). Flatten the inner tab-set so it
+** is not a card-within-a-card, and lay the buttons out as a clean side rail
+** that sits inside the outer card instead of overhanging it.
+*/
+.tc-sidebar-lists .tc-tab-content .tc-tab-set {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	margin-top: 0;
+	overflow: visible;
+}
+
+.tc-sidebar-lists .tc-tab-buttons.tc-vertical {
+	display: block;
+	padding: 0;
+	margin-inline-end: 0.6em;
+	border-bottom: none;
+}
+
+.tc-sidebar-lists .tc-tab-buttons.tc-vertical button {
+	display: block;
+	width: 100%;
+	text-align: end;
+	border: none;
+	border-radius: 8px;
+	padding: 0.4em 0.6em;
+	margin: 0 0 0.2em 0;
+	background: transparent;
+	color: <<colour sidebar-tab-foreground>>;
+}
+
+.tc-sidebar-lists .tc-tab-buttons.tc-vertical button:hover {
 	background: var(--vivid-glass);
-	border: 1px solid var(--vivid-glass-border);
-	border-radius: var(--vivid-radius);
-	padding: 0.85em 1.05em;
-	margin-top: 0.7em;
-	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
-	box-shadow: var(--vivid-shadow);
+}
+
+.tc-sidebar-lists .tc-tab-buttons.tc-vertical button.tc-tab-selected {
+	color: #0b0c14;
+	border: none;
+	background: linear-gradient(135deg, rgba(139,92,255,0.95), rgba(34,211,238,0.9));
+}
+
+.tc-sidebar-lists .tc-tab-buttons.tc-vertical button.tc-tab-selected::after {
+	display: none;
+}
+
+.tc-sidebar-lists .tc-tab-content.tc-vertical {
+	padding-top: 0;
+	border-inline-start: 1px solid var(--vivid-glass-border);
 }
 
 /* Sidebar tiddler links */
