@@ -159,3 +159,120 @@ html {
 	padding: 0.18em 0.75em;
 	font-weight: 600;
 }
+
+/* --- Sidebar polish (pass 2) --- */
+
+/* Brighter default icon contrast for the page-control chips */
+.tc-page-controls button svg {
+	fill: #aeb4dd;
+}
+
+/* New-tiddler button promoted to a filled gradient action */
+.tc-page-controls button[class*="new-tiddler"] {
+	background: linear-gradient(135deg, var(--vivid-violet), var(--vivid-magenta));
+	box-shadow: 0 6px 16px rgba(139,92,255,0.40);
+}
+
+.tc-page-controls button[class*="new-tiddler"] svg,
+.tc-page-controls button[class*="new-tiddler"]:hover svg {
+	fill: #0b0c14;
+}
+
+.tc-page-controls button[class*="new-tiddler"]:hover {
+	background: linear-gradient(135deg, var(--vivid-violet), var(--vivid-magenta));
+	transform: translateY(-2px);
+	box-shadow: 0 8px 22px rgba(255,73,219,0.45);
+}
+
+/* A touch more breathing room around the control row */
+.tc-page-controls {
+	margin: 0.4em 0 0.9em;
+}
+
+/* ====================== STORY RIVER ====================== */
+
+.tc-story-river {
+	padding-top: 1em;
+}
+
+/* Tiddler frame: floating glass card */
+.tc-tiddler-frame {
+	background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+	border: 1px solid var(--vivid-glass-border);
+	border-radius: var(--vivid-radius-lg);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	box-shadow: var(--vivid-shadow);
+	padding: 1.4em 1.9em 1.6em;
+	margin-bottom: 1.7em;
+	position: relative;
+	overflow: hidden;
+	transition: transform 240ms var(--vivid-ease), box-shadow 240ms var(--vivid-ease), border-color 240ms var(--vivid-ease);
+}
+
+/* Saturated accent strip along the top edge of every card */
+.tc-tiddler-frame::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--vivid-violet), var(--vivid-cyan), var(--vivid-magenta));
+	opacity: 0.95;
+}
+
+.tc-tiddler-frame:hover {
+	transform: translateY(-3px);
+	border-color: rgba(139,92,255,0.40);
+	box-shadow: 0 16px 44px rgba(0,0,0,0.55), 0 0 26px rgba(139,92,255,0.18);
+}
+
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	border-color: rgba(139,92,255,0.45);
+}
+
+/* Title: subtle white-to-violet gradient wordmark */
+.tc-tiddler-title .tc-title,
+.tc-tiddler-title .tc-title a.tc-tiddlylink {
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	background: linear-gradient(120deg, #ffffff 0%, #c7b3ff 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+/* Tiddler control icons glow magenta on hover */
+.tc-tiddler-controls button svg {
+	transition: fill 160ms var(--vivid-ease);
+}
+
+.tc-tiddler-controls button:hover svg {
+	fill: var(--vivid-magenta);
+}
+
+/* Body links: violet with an animated underline that shifts to cyan */
+.tc-tiddler-body a.tc-tiddlylink {
+	color: <<colour tiddler-link-foreground>>;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(139,92,255,0.40);
+	transition: color 150ms var(--vivid-ease), border-color 150ms var(--vivid-ease);
+}
+
+.tc-tiddler-body a.tc-tiddlylink:hover {
+	color: var(--vivid-cyan);
+	border-bottom-color: var(--vivid-cyan);
+}
+
+/* Inline code and code blocks: rounded, mint on deep panel */
+.tc-tiddler-body code {
+	border-radius: 6px;
+	padding: 0.08em 0.4em;
+}
+
+.tc-tiddler-body pre {
+	border-radius: 12px;
+	padding: 1em 1.1em;
+}
